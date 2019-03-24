@@ -41,24 +41,22 @@ def getChamp():
     champions = open('champions.json')
     champion = json.load(champions)
     getTabCompletion(champion)
-    global champ
-    champ = raw_input('Champion: ')
+    champ = raw_input('Champion: ')  # input() for Py 3.X
     return champ
 
 
 def getLane():
     getTabCompletion(lanelist)
-    global lane
-    lane = raw_input('Lane: ')
+    lane = raw_input('Lane: ')  # input for Py 3.X
     return lane
 
 
 def getLink():
     webbrowser.open('https://euw.op.gg/champion/' + getChamp() + '/statistics/' + getLane())
-    print ''
+    print ('')
     getLink()
 
 
 if __name__ == '__main__':
-    print 'OP.GG LOOKUP\n'
+    print ('OP.GG LOOKUP\n')
     getLink()
