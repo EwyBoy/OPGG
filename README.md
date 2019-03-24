@@ -2,6 +2,7 @@
 
 ![](https://i.imgur.com/eh9LIjG.png)
 
+# About #
 OPGG Lookup is a simple command line tool written in python to easy look up builds for any champion in League of Legends.
 All you gotta do is type in the name of the champion and the lane and it will open your favorite web browser for you and take you to a OP.GG page with the best build and runes for your champion and lane.
 This works great if you want to play a champion in a lane that champion usually don't go and you want to find what item to start or what runes you should go.  
