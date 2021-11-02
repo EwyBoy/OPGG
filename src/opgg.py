@@ -1,11 +1,11 @@
+import json
 import webbrowser
 import readline
-import json
 
 
-# VERSION: 1.1.0 #
-# Made by Ewy 16.10.2018 #
-# Last Update: 20.03.2019 #
+# VERSION: 2.0.0
+# Made by Ewy 16.10.2018
+# Last Update: 02.11.2021
 
 class TabCompleter(object):
 
@@ -26,37 +26,42 @@ class TabCompleter(object):
             return None
 
 
-lanelist = ["mid", "top", "jungle", "bot", "support"]
+LANE_LIST = ['aram', 'mid', 'top', 'jungle', 'bot', 'support']
 
 
-def getTabCompletion(list):
-    completer = TabCompleter(list)
+def getTabCompletion(champions):
+    completer = TabCompleter(champions)
     readline.set_completer(completer.complete)
     readline.parse_and_bind('tab: complete')
-    for kw in list:
-        readline.add_history(kw)
+
+    for champion in champions:
+        readline.add_history(champion)
 
 
 def getChamp():
-    champions = open('champions.json')
-    champion = json.load(champions)
-    getTabCompletion(champion)
-    champ = raw_input('Champion: ')  # input() for Py 3.X
+    getTabCompletion(json.load(open('champions.json')))
+    champ = input('Champion: ')
     return champ
 
 
 def getLane():
-    getTabCompletion(lanelist)
-    lane = raw_input('Lane: ')  # input for Py 3.X
+    getTabCompletion(LANE_LIST)
+    lane = input('Lane: ')
     return lane
 
 
-def getLink():
-    webbrowser.open('https://euw.op.gg/champion/' + getChamp() + '/statistics/' + getLane())
-    print ('')
-    getLink()
+def getLink(lane, champ):
+    if lane == 'aram':
+        url = 'https://euw.op.gg/aram/' + champ + '/statistics/450/build'
+    else:
+        url = 'https://euw.op.gg/champion/' + champ + '/statistics/' + lane
+
+    webbrowser.open(url)
 
 
 if __name__ == '__main__':
-    print ('OP.GG LOOKUP\n')
-    getLink()
+    print('OP.GG LOOKUP\n')
+
+    while True:
+        getLink(getLane(), getChamp())
+        print('')
