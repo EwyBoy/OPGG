@@ -3,7 +3,7 @@ import webbrowser
 import readline
 
 
-# VERSION: 2.0.0
+# VERSION: 2.1.0
 # Made by Ewy 16.10.2018
 # Last Update: 02.11.2021
 
@@ -50,12 +50,14 @@ def getLane():
     return lane
 
 
-def getLink(lane, champ):
+def getLink(champ, lane):
     if lane == 'aram':
-        url = 'https://euw.op.gg/aram/' + champ + '/statistics/450/build'
+        return 'https://euw.op.gg/aram/' + champ + '/statistics/450/build'
     else:
-        url = 'https://euw.op.gg/champion/' + champ + '/statistics/' + lane
+        return 'https://euw.op.gg/champion/' + champ + '/statistics/' + lane
 
+
+def openLink(url):
     webbrowser.open(url)
 
 
@@ -63,5 +65,5 @@ if __name__ == '__main__':
     print('OP.GG LOOKUP\n')
 
     while True:
-        getLink(getLane(), getChamp())
+        openLink(getLink(getChamp(), getLane()))
         print('')
